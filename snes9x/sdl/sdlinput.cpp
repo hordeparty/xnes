@@ -68,18 +68,31 @@ void S9xInitInputDevices (int r, int l, int d, int u, int st, int sl, int a, int
 {
 	S9xUnmapAllControls();
 #ifdef USE_SDL
-    S9xMapButton(r, S9xGetCommandT("Joypad1 Right"), false);
-    S9xMapButton(l, S9xGetCommandT("Joypad1 Left"), false);
-    S9xMapButton(d, S9xGetCommandT("Joypad1 Down"), false);
-    S9xMapButton(u, S9xGetCommandT("Joypad1 Up"), false);
-    S9xMapButton(st, S9xGetCommandT("Joypad1 Start"), false);
-    S9xMapButton(sl,  S9xGetCommandT("Joypad1 Select"), false);
-    S9xMapButton(a, S9xGetCommandT("Joypad1 A"), false);
-    S9xMapButton(b, S9xGetCommandT("Joypad1 B"), false);
-    S9xMapButton(x, S9xGetCommandT("Joypad1 X"), false);
-    S9xMapButton(y, S9xGetCommandT("Joypad1 Y"), false);
-    S9xMapButton(lb, S9xGetCommandT("Joypad1 L"), false);
-    S9xMapButton(rb, S9xGetCommandT("Joypad1 R"), false);
+    S9xMapButton(1, S9xGetCommandT("Joypad1 Right"), false);
+    S9xMapButton(2, S9xGetCommandT("Joypad1 Left"), false);
+    S9xMapButton(3, S9xGetCommandT("Joypad1 Down"), false);
+    S9xMapButton(4, S9xGetCommandT("Joypad1 Up"), false);
+    S9xMapButton(5, S9xGetCommandT("Joypad1 Start"), false);
+    S9xMapButton(6,  S9xGetCommandT("Joypad1 Select"), false);
+    S9xMapButton(7, S9xGetCommandT("Joypad1 A"), false);
+    S9xMapButton(8, S9xGetCommandT("Joypad1 B"), false);
+    S9xMapButton(9, S9xGetCommandT("Joypad1 X"), false);
+    S9xMapButton(10, S9xGetCommandT("Joypad1 Y"), false);
+    S9xMapButton(11, S9xGetCommandT("Joypad1 L"), false);
+    S9xMapButton(12, S9xGetCommandT("Joypad1 R"), false);
+
+    S9xMapButton(13, S9xGetCommandT("Joypad2 Right"), false);
+    S9xMapButton(14, S9xGetCommandT("Joypad2 Left"), false);
+    S9xMapButton(15, S9xGetCommandT("Joypad2 Down"), false);
+    S9xMapButton(16, S9xGetCommandT("Joypad2 Up"), false);
+    S9xMapButton(17, S9xGetCommandT("Joypad2 Start"), false);
+    S9xMapButton(18,  S9xGetCommandT("Joypad2 Select"), false);
+    S9xMapButton(19, S9xGetCommandT("Joypad2 A"), false);
+    S9xMapButton(20, S9xGetCommandT("Joypad2 B"), false);
+    S9xMapButton(21, S9xGetCommandT("Joypad2 X"), false);
+    S9xMapButton(22, S9xGetCommandT("Joypad2 Y"), false);
+    S9xMapButton(23, S9xGetCommandT("Joypad2 L"), false);
+    S9xMapButton(24, S9xGetCommandT("Joypad2 R"), false);
 #endif
 }
 

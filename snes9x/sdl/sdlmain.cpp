@@ -190,6 +190,7 @@ static void NSRTControllerSetup (void)
 		// First plug in both, they'll change later as needed
 		S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
 		S9xSetController(1, CTL_JOYPAD, 1, 0, 0, 0);
+		return;
 
 		switch (Memory.NSRTHeader[29])
 		{
@@ -565,6 +566,8 @@ void S9xParseArg (char **argv, int &i, int argc){
 
 #ifdef HTML
 extern "C" void toggle_display_framerate() __attribute__((used));
+extern "C" void press(int) __attribute__((used));
+extern "C" void depress(int) __attribute__((used));
 extern "C" void run(char*) __attribute__((used));
 extern "C" int set_frameskip(int) __attribute__((used));
 int set_frameskip(int n){
@@ -574,6 +577,12 @@ return n;
 void toggle_display_framerate(){
 
     Settings.DisplayFrameRate = !Settings.DisplayFrameRate;
+}
+void press(int btn){
+    S9xReportButton (btn, true);
+}
+void depress(int btn){
+    S9xReportButton (btn, false);
 }
 void mainloop(){
     S9xProcessEvents(FALSE);
@@ -590,7 +599,8 @@ void reboot_emulator(char *filename){
 		exit(1);
 	}
 
-	NSRTControllerSetup();
+        S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
+        S9xSetController(1, CTL_JOYPAD, 1, 0, 0, 0);
 
 	printf("Attempting to load SRAM %s.\n", S9xGetFilename(".srm", SRAM_DIR));
 	bool8 sramloaded = Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));
@@ -655,8 +665,6 @@ int main (int argc, char **argv)
 			if (err) {
 				console.log(err);
 			} else {
-				console.log('File system synced.');
-				window.initSNES();
 			}
 		});
 	);
@@ -710,6 +718,8 @@ int main (int argc, char **argv)
 	S9xInitSound(sound_buffer_size, 0);
 	S9xSetSoundMute(TRUE);
 
+        S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
+        S9xSetController(1, CTL_JOYPAD, 1, 0, 0, 0);
 	S9xReportControllers();
 
 #ifdef GFX_MULTI_FORMAT

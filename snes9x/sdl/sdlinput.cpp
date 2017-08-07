@@ -94,7 +94,6 @@ void S9xInitInputDevices (int r, int l, int d, int u, int st, int sl, int a, int
     S9xMapButton(23, S9xGetCommandT("Joypad2 L"), false);
     S9xMapButton(24, S9xGetCommandT("Joypad2 R"), false);
 
-    /*
     S9xMapButton(25, S9xGetCommandT("Joypad3 Right"), false);
     S9xMapButton(26, S9xGetCommandT("Joypad3 Left"), false);
     S9xMapButton(27, S9xGetCommandT("Joypad3 Down"), false);
@@ -133,7 +132,6 @@ void S9xInitInputDevices (int r, int l, int d, int u, int st, int sl, int a, int
     S9xMapButton(58, S9xGetCommandT("Joypad5 Y"), false);
     S9xMapButton(59, S9xGetCommandT("Joypad5 L"), false);
     S9xMapButton(60, S9xGetCommandT("Joypad5 R"), false);
-    */
 #endif
 }
 

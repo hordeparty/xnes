@@ -188,9 +188,8 @@ static void NSRTControllerSetup (void)
 	if (!strncmp((const char *) Memory.NSRTHeader + 24, "NSRT", 4))
 	{
 		// First plug in both, they'll change later as needed
-        S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
-        S9xSetController(1, CTL_MP5, 1, 2, 3, 4);
-        return;
+		S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
+		S9xSetController(1, CTL_MP5, 1, 2, 3, 4);
 
 		switch (Memory.NSRTHeader[29])
 		{
@@ -599,8 +598,8 @@ void reboot_emulator(char *filename){
 		exit(1);
 	}
 
-        S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
-        S9xSetController(1, CTL_MP5, 1, 2, 3, 4);
+	S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
+	S9xSetController(1, CTL_MP5, 1, 2, 3, 4);
 
 	printf("Attempting to load SRAM %s.\n", S9xGetFilename(".srm", SRAM_DIR));
 	bool8 sramloaded = Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));
@@ -665,8 +664,8 @@ int main (int argc, char **argv)
 			if (err) {
 				console.log(err);
 			} else {
-                        console.log('File system synced.');
-                        window.initSNES();
+				console.log('File system synced.');
+				window.initSNES();
 			}
 		});
 	);
@@ -748,8 +747,8 @@ int main (int argc, char **argv)
 		exit(1);
 	}
 
-        S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
-        S9xSetController(1, CTL_MP5, 1, 2, 3, 4);
+	S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
+	S9xSetController(1, CTL_MP5, 1, 2, 3, 4);
 
 	printf("Attempting to load SRAM %s.\n", S9xGetFilename(".srm", SRAM_DIR));
 	bool8 sramloaded = Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));

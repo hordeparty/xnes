@@ -665,6 +665,8 @@ int main (int argc, char **argv)
 			if (err) {
 				console.log(err);
 			} else {
+                        console.log('File system synced.');
+                        window.initSNES();
 			}
 		});
 	);

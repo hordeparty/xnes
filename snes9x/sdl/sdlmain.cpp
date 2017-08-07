@@ -747,9 +747,6 @@ int main (int argc, char **argv)
 		exit(1);
 	}
 
-	S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
-	S9xSetController(1, CTL_MP5, 1, 2, 3, 4);
-
 	printf("Attempting to load SRAM %s.\n", S9xGetFilename(".srm", SRAM_DIR));
 	bool8 sramloaded = Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));
 	if (sramloaded)

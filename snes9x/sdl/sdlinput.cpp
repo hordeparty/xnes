@@ -73,7 +73,7 @@ void S9xInitInputDevices (int r, int l, int d, int u, int st, int sl, int a, int
     S9xMapButton(3, S9xGetCommandT("Joypad1 Down"), false);
     S9xMapButton(4, S9xGetCommandT("Joypad1 Up"), false);
     S9xMapButton(5, S9xGetCommandT("Joypad1 Start"), false);
-    S9xMapButton(6,  S9xGetCommandT("Joypad1 Select"), false);
+    S9xMapButton(6, S9xGetCommandT("Joypad1 Select"), false);
     S9xMapButton(7, S9xGetCommandT("Joypad1 A"), false);
     S9xMapButton(8, S9xGetCommandT("Joypad1 B"), false);
     S9xMapButton(9, S9xGetCommandT("Joypad1 X"), false);
@@ -86,13 +86,54 @@ void S9xInitInputDevices (int r, int l, int d, int u, int st, int sl, int a, int
     S9xMapButton(15, S9xGetCommandT("Joypad2 Down"), false);
     S9xMapButton(16, S9xGetCommandT("Joypad2 Up"), false);
     S9xMapButton(17, S9xGetCommandT("Joypad2 Start"), false);
-    S9xMapButton(18,  S9xGetCommandT("Joypad2 Select"), false);
+    S9xMapButton(18, S9xGetCommandT("Joypad2 Select"), false);
     S9xMapButton(19, S9xGetCommandT("Joypad2 A"), false);
     S9xMapButton(20, S9xGetCommandT("Joypad2 B"), false);
     S9xMapButton(21, S9xGetCommandT("Joypad2 X"), false);
     S9xMapButton(22, S9xGetCommandT("Joypad2 Y"), false);
     S9xMapButton(23, S9xGetCommandT("Joypad2 L"), false);
     S9xMapButton(24, S9xGetCommandT("Joypad2 R"), false);
+
+    /*
+    S9xMapButton(25, S9xGetCommandT("Joypad3 Right"), false);
+    S9xMapButton(26, S9xGetCommandT("Joypad3 Left"), false);
+    S9xMapButton(27, S9xGetCommandT("Joypad3 Down"), false);
+    S9xMapButton(28, S9xGetCommandT("Joypad3 Up"), false);
+    S9xMapButton(29, S9xGetCommandT("Joypad3 Start"), false);
+    S9xMapButton(30, S9xGetCommandT("Joypad3 Select"), false);
+    S9xMapButton(31, S9xGetCommandT("Joypad3 A"), false);
+    S9xMapButton(32, S9xGetCommandT("Joypad3 B"), false);
+    S9xMapButton(33, S9xGetCommandT("Joypad3 X"), false);
+    S9xMapButton(34, S9xGetCommandT("Joypad3 Y"), false);
+    S9xMapButton(35, S9xGetCommandT("Joypad3 L"), false);
+    S9xMapButton(36, S9xGetCommandT("Joypad3 R"), false);
+
+    S9xMapButton(37, S9xGetCommandT("Joypad4 Right"), false);
+    S9xMapButton(38, S9xGetCommandT("Joypad4 Left"), false);
+    S9xMapButton(39, S9xGetCommandT("Joypad4 Down"), false);
+    S9xMapButton(40, S9xGetCommandT("Joypad4 Up"), false);
+    S9xMapButton(41, S9xGetCommandT("Joypad4 Start"), false);
+    S9xMapButton(42, S9xGetCommandT("Joypad4 Select"), false);
+    S9xMapButton(43, S9xGetCommandT("Joypad4 A"), false);
+    S9xMapButton(44, S9xGetCommandT("Joypad4 B"), false);
+    S9xMapButton(45, S9xGetCommandT("Joypad4 X"), false);
+    S9xMapButton(46, S9xGetCommandT("Joypad4 Y"), false);
+    S9xMapButton(47, S9xGetCommandT("Joypad4 L"), false);
+    S9xMapButton(48, S9xGetCommandT("Joypad4 R"), false);
+
+    S9xMapButton(49, S9xGetCommandT("Joypad5 Right"), false);
+    S9xMapButton(50, S9xGetCommandT("Joypad5 Left"), false);
+    S9xMapButton(51, S9xGetCommandT("Joypad5 Down"), false);
+    S9xMapButton(52, S9xGetCommandT("Joypad5 Up"), false);
+    S9xMapButton(53, S9xGetCommandT("Joypad5 Start"), false);
+    S9xMapButton(54, S9xGetCommandT("Joypad5 Select"), false);
+    S9xMapButton(55, S9xGetCommandT("Joypad5 A"), false);
+    S9xMapButton(56, S9xGetCommandT("Joypad5 B"), false);
+    S9xMapButton(57, S9xGetCommandT("Joypad5 X"), false);
+    S9xMapButton(58, S9xGetCommandT("Joypad5 Y"), false);
+    S9xMapButton(59, S9xGetCommandT("Joypad5 L"), false);
+    S9xMapButton(60, S9xGetCommandT("Joypad5 R"), false);
+    */
 #endif
 }
 

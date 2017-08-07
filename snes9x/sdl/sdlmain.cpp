@@ -188,9 +188,9 @@ static void NSRTControllerSetup (void)
 	if (!strncmp((const char *) Memory.NSRTHeader + 24, "NSRT", 4))
 	{
 		// First plug in both, they'll change later as needed
-		S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
-		S9xSetController(1, CTL_JOYPAD, 1, 0, 0, 0);
-		return;
+        S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
+        S9xSetController(1, CTL_MP5, 1, 2, 3, 4);
+        return;
 
 		switch (Memory.NSRTHeader[29])
 		{
@@ -600,7 +600,7 @@ void reboot_emulator(char *filename){
 	}
 
         S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
-        S9xSetController(1, CTL_JOYPAD, 1, 0, 0, 0);
+        S9xSetController(1, CTL_MP5, 1, 2, 3, 4);
 
 	printf("Attempting to load SRAM %s.\n", S9xGetFilename(".srm", SRAM_DIR));
 	bool8 sramloaded = Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));
@@ -673,7 +673,7 @@ int main (int argc, char **argv)
 	Settings.MouseMaster = TRUE;
 	Settings.SuperScopeMaster = TRUE;
 	Settings.JustifierMaster = TRUE;
-	Settings.MultiPlayer5Master = FALSE;
+	Settings.MultiPlayer5Master = TRUE;
 	Settings.FrameTimePAL = 20000;
 	Settings.FrameTimeNTSC = 16667;
 	Settings.SixteenBitSound = TRUE;
@@ -719,7 +719,7 @@ int main (int argc, char **argv)
 	S9xSetSoundMute(TRUE);
 
         S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
-        S9xSetController(1, CTL_JOYPAD, 1, 0, 0, 0);
+        S9xSetController(1, CTL_MP5, 1, 2, 3, 4);
 	S9xReportControllers();
 
 #ifdef GFX_MULTI_FORMAT
@@ -746,7 +746,8 @@ int main (int argc, char **argv)
 		exit(1);
 	}
 
-	NSRTControllerSetup();
+        S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
+        S9xSetController(1, CTL_MP5, 1, 2, 3, 4);
 
 	printf("Attempting to load SRAM %s.\n", S9xGetFilename(".srm", SRAM_DIR));
 	bool8 sramloaded = Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));

@@ -599,7 +599,15 @@ void reboot_emulator(char *filename){
 	}
 
 	S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
-	S9xSetController(1, CTL_MP5, 1, 2, 3, 4);
+        int disable_multipad = EM_ASM_INT({
+            if(window.disable_multipad) return 1;
+            return 0;
+        });
+        if(disable_multipad) {
+            S9xSetController(1, CTL_JOYPAD, 1, 1, 1, 1);
+        } else {
+            S9xSetController(1, CTL_MP5, 1, 2, 3, 4);
+        }
 
 	printf("Attempting to load SRAM %s.\n", S9xGetFilename(".srm", SRAM_DIR));
 	bool8 sramloaded = Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));

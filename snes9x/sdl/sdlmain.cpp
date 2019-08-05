@@ -424,10 +424,18 @@ const char * S9xChooseFilename (bool8 read_only)
 	return (filename);
 }
 
-
-bool8 S9xOpenSnapshotFile (const char *filename, bool8 read_only, STREAM *file)
+bool8 S9xOpenSnapshotFile (const char *fname, bool8 read_only, STREAM *file)
 {
     printf("open snapshotfile\n");
+
+    if (read_only)
+    {
+        if ((*file = OPEN_STREAM (fname, "rb")))
+            return (TRUE);
+    } else {
+        if ((*file = OPEN_STREAM (fname, "wb")))
+            return (TRUE);
+    }
     return FALSE;
 }
 
@@ -568,7 +576,13 @@ extern "C" void toggle_display_framerate() __attribute__((used));
 extern "C" void press(int) __attribute__((used));
 extern "C" void depress(int) __attribute__((used));
 extern "C" void run(char*) __attribute__((used));
+extern "C" void load_sram() __attribute__((used));
 extern "C" int set_frameskip(int) __attribute__((used));
+
+extern "C" void freezegame() __attribute__((used));
+extern "C" void unfreezegame() __attribute__((used));
+
+
 int set_frameskip(int n){
 Settings.SkipFrames = n;
 return n;
@@ -582,6 +596,12 @@ void press(int btn){
 }
 void depress(int btn){
     S9xReportButton (btn, false);
+}
+void freezegame(){
+    S9xFreezeGame("/DUMP.frz");
+}
+void unfreezegame(){
+   S9xUnfreezeGame("/DUMP.frz");
 }
 void mainloop(){
     S9xProcessEvents(FALSE);
@@ -655,6 +675,19 @@ void run(char *filename){
 
 #endif
 
+void load_sram() {
+
+	printf("Attempting to load SRAM %s.\n", S9xGetFilename(".srm", SRAM_DIR));
+	bool8 sramloaded = Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));
+	if (sramloaded)
+	{
+		printf("Load successful.\n");
+	}
+	else
+	{
+		printf("Load failed.\n");
+	}
+}
 
 int main (int argc, char **argv)
 {
@@ -673,6 +706,7 @@ int main (int argc, char **argv)
 				console.log(err);
 			} else {
 				console.log('File system synced.');
+				window.Module._load_sram();
 				window.initSNES();
 			}
 		});

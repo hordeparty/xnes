@@ -1,0 +1,4 @@
+xnes:
+  build: .
+  volumes:
+    - ./:/src

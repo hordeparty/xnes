@@ -92,8 +92,6 @@ static const char	dirNames[13][32] =
 
 void S9xParseInputConfig(ConfigFile &, int pass); // defined in sdlinput
 
-static void NSRTControllerSetup (void);
-
 void _makepath (char *path, const char *, const char *dir, const char *fname, const char *ext)
 {
 	if (dir && *dir)
@@ -181,84 +179,6 @@ void S9xExtraUsage (void) // domaemon: ExtraUsage -> ExtraDisplayUsage
  */
 const char *S9xChooseMovieFilename (bool8 read_only){
     return NULL;
-}
-
-static void NSRTControllerSetup (void)
-{
-	if (!strncmp((const char *) Memory.NSRTHeader + 24, "NSRT", 4))
-	{
-		// First plug in both, they'll change later as needed
-		S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
-		S9xSetController(1, CTL_MP5, 1, 2, 3, 4);
-
-		switch (Memory.NSRTHeader[29])
-		{
-			case 0x00:	// Everything goes
-				break;
-
-			case 0x10:	// Mouse in Port 0
-				S9xSetController(0, CTL_MOUSE,      0, 0, 0, 0);
-				break;
-
-			case 0x01:	// Mouse in Port 1
-				S9xSetController(1, CTL_MOUSE,      1, 0, 0, 0);
-				break;
-
-			case 0x03:	// Super Scope in Port 1
-				S9xSetController(1, CTL_SUPERSCOPE, 0, 0, 0, 0);
-				break;
-
-			case 0x06:	// Multitap in Port 1
-				S9xSetController(1, CTL_MP5,        1, 2, 3, 4);
-				break;
-
-			case 0x66:	// Multitap in Ports 0 and 1
-				S9xSetController(0, CTL_MP5,        0, 1, 2, 3);
-				S9xSetController(1, CTL_MP5,        4, 5, 6, 7);
-				break;
-
-			case 0x08:	// Multitap in Port 1, Mouse in new Port 1
-				S9xSetController(1, CTL_MOUSE,      1, 0, 0, 0);
-				// There should be a toggle here for putting in Multitap instead
-				break;
-
-			case 0x04:	// Pad or Super Scope in Port 1
-				S9xSetController(1, CTL_SUPERSCOPE, 0, 0, 0, 0);
-				// There should be a toggle here for putting in a pad instead
-				break;
-
-			case 0x05:	// Justifier - Must ask user...
-				S9xSetController(1, CTL_JUSTIFIER,  1, 0, 0, 0);
-				// There should be a toggle here for how many justifiers
-				break;
-
-			case 0x20:	// Pad or Mouse in Port 0
-				S9xSetController(0, CTL_MOUSE,      0, 0, 0, 0);
-				// There should be a toggle here for putting in a pad instead
-				break;
-
-			case 0x22:	// Pad or Mouse in Port 0 & 1
-				S9xSetController(0, CTL_MOUSE,      0, 0, 0, 0);
-				S9xSetController(1, CTL_MOUSE,      1, 0, 0, 0);
-				// There should be a toggles here for putting in pads instead
-				break;
-
-			case 0x24:	// Pad or Mouse in Port 0, Pad or Super Scope in Port 1
-				// There should be a toggles here for what to put in, I'm leaving it at gamepad for now
-				break;
-
-			case 0x27:	// Pad or Mouse in Port 0, Pad or Mouse or Super Scope in Port 1
-				// There should be a toggles here for what to put in, I'm leaving it at gamepad for now
-				break;
-
-			// Not Supported yet
-			case 0x99:	// Lasabirdie
-				break;
-
-			case 0x0A:	// Barcode Battler
-				break;
-		}
-	}
 }
 
 /*
@@ -424,18 +344,10 @@ const char * S9xChooseFilename (bool8 read_only)
 	return (filename);
 }
 
-bool8 S9xOpenSnapshotFile (const char *fname, bool8 read_only, STREAM *file)
+
+bool8 S9xOpenSnapshotFile (const char *filename, bool8 read_only, STREAM *file)
 {
     printf("open snapshotfile\n");
-
-    if (read_only)
-    {
-        if ((*file = OPEN_STREAM (fname, "rb")))
-            return (TRUE);
-    } else {
-        if ((*file = OPEN_STREAM (fname, "wb")))
-            return (TRUE);
-    }
     return FALSE;
 }
 
@@ -572,36 +484,14 @@ void S9xParseArg (char **argv, int &i, int argc){
 
 
 #ifdef HTML
-extern "C" void toggle_display_framerate() __attribute__((used));
 extern "C" void press(int) __attribute__((used));
 extern "C" void depress(int) __attribute__((used));
 extern "C" void run(char*) __attribute__((used));
-extern "C" void load_sram() __attribute__((used));
-extern "C" int set_frameskip(int) __attribute__((used));
-
-extern "C" void freezegame() __attribute__((used));
-extern "C" void unfreezegame() __attribute__((used));
-
-
-int set_frameskip(int n){
-Settings.SkipFrames = n;
-return n;
-}
-void toggle_display_framerate(){
-
-    Settings.DisplayFrameRate = !Settings.DisplayFrameRate;
-}
 void press(int btn){
     S9xReportButton (btn, true);
 }
 void depress(int btn){
     S9xReportButton (btn, false);
-}
-void freezegame(){
-    S9xFreezeGame("/DUMP.frz");
-}
-void unfreezegame(){
-   S9xUnfreezeGame("/DUMP.frz");
 }
 void mainloop(){
     S9xProcessEvents(FALSE);
@@ -675,19 +565,6 @@ void run(char *filename){
 
 #endif
 
-void load_sram() {
-
-	printf("Attempting to load SRAM %s.\n", S9xGetFilename(".srm", SRAM_DIR));
-	bool8 sramloaded = Memory.LoadSRAM(S9xGetFilename(".srm", SRAM_DIR));
-	if (sramloaded)
-	{
-		printf("Load successful.\n");
-	}
-	else
-	{
-		printf("Load failed.\n");
-	}
-}
 
 int main (int argc, char **argv)
 {
@@ -706,7 +583,6 @@ int main (int argc, char **argv)
 				console.log(err);
 			} else {
 				console.log('File system synced.');
-				window.Module._load_sram();
 				window.initSNES();
 			}
 		});

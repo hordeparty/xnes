@@ -149,7 +149,7 @@ void S9xProcessEvents (bool8 block)
 			// domaemon: not sure it's the best idea, but reserving the SDLK_q for quit.
 			if (event.key.keysym.sym == SDLK_q)
 			{
-				quit_state = TRUE;
+				// quit_state = TRUE;
 			}
 			else
 			{

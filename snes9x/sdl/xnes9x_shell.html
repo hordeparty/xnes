@@ -197,27 +197,6 @@
         var cout_print = Module.print;
         var filename = "";
 
-        var frameskipAdjust = (function() {
-          var frameskip = 0;
-          var set_frameskip = Module.cwrap('set_frameskip', 'number', ['number']);;
-          var fn = function(n) {
-            return function(evt) {
-              frameskip += n;
-              if (frameskip < 0) frameskip = 0;
-              frameskipSpan.textContent = '' + frameskip;
-              set_frameskip(frameskip);
-              return frameskip;
-            }
-          };
-
-          fn.reset = function() {
-            frameskip = 0;
-            frameskipSpan.textContent = '0';
-            set_frameskip(frameskip);
-          };
-
-          return fn;
-        })();
 
         var toggleTransparency = (function() {
           var snes_transparency = 1;
@@ -232,7 +211,7 @@
           var pointerlock = document.getElementById('pointer-lock').checked;
           var resize = document.getElementById('resize').checked;
           // double-checked, this does expect js boolean values
-          Module.requestFullScreen(pointerlock, resize);
+          document.getElementById("canvas").requestFullscreen();
         };
 
         var snesReadFile = function(evt) {
@@ -263,7 +242,6 @@
             interval = setInterval(Module._S9xAutoSaveSRAM, 10000);
             document.getElementById("start").disabled = true;
     	      // reboot_romnum = -1; // seems unnecessary?
-    	      frameskipAdjust.reset();
     	      run(filename);
           };
         })();
@@ -271,8 +249,6 @@
         fpsToggle.addEventListener('click', Module._toggle_display_framerate);
         startbttn.addEventListener('click', snesMain);
         fileChooser.addEventListener('change', snesReadFile);
-        frameskipInc.addEventListener('click', frameskipAdjust(1));
-        frameskipDec.addEventListener('click', frameskipAdjust(-1));
         transToggle.addEventListener('click', toggleTransparency);
         fullscreen.addEventListener('click', goFullScreen);
         // make sure we sync state before tab closes
